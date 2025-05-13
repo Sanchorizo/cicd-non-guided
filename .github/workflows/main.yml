@@ -1,31 +1,17 @@
-name: Utiliser des artefacts
+name: CI Multi-lignes
 
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Créer un artefact
-        run: echo "Fichier artefact" > fichier.txt
-
-      - name: Télécharger l'artefact
-        uses: actions/upload-artifact@v4
-        with:
-          name: fichier-artefact
-          path: fichier.txt
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Télécharger l'artefact
-        uses: actions/download-artifact@v4
-        with:
-          name: fichier-artefact
-
-      - name: Utiliser l'artefact
-        run: cat fichier.txt
+      - name: Exécuter un script multi-lignes
+        run: |
+          echo "Ceci est la première ligne du script."
+          echo "Voici une deuxième ligne."
+          echo "Et enfin, la troisième ligne."
