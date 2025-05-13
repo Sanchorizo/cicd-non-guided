@@ -1,14 +1,22 @@
-name: CI avec Secrets
+name: CI avec Matrice
 
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['14', '16']
 
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Utiliser un secret
-        run: echo "Le secret est ${{ secrets.MY_SECRET }}"
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Afficher la version de Node.js
+        run: node -v
