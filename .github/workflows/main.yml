@@ -29,3 +29,19 @@ jobs:
           echo "Ceci est la première ligne du script."
           echo "Voici une deuxième ligne."
           echo "Et enfin, la troisième ligne."
+name: Setup Node.js
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14'
