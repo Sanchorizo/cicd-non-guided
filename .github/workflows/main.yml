@@ -1,22 +1,29 @@
-name: Exécuter les tests unitaires
+name: Déploiement sur GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Installer Node.js et les dépendances
         uses: actions/setup-node@v4
         with:
           node-version: '14'
+      - run: npm install
 
-      - name: Installer les dépendances
-        run: npm install
+      - name: Build
+        run: npm run build
 
-      - name: Exécuter les tests
-        run: npm test
+      - name: Déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
