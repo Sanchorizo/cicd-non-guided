@@ -1,0 +1,14 @@
+name: CI Simple
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Afficher un message
+        run: echo "Hello, world!"
