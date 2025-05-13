@@ -12,3 +12,20 @@ jobs:
 
       - name: Afficher un message
         run: echo "Hello, world!"
+name: CI Multi-lignes
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Exécuter un script multi-lignes
+        run: |
+          echo "Ceci est la première ligne du script."
+          echo "Voici une deuxième ligne."
+          echo "Et enfin, la troisième ligne."
